@@ -117,11 +117,19 @@ BOOL CCodingTestDlg::OnInitDialog()
 
 void CCodingTestDlg::inItImage()
 {
+	// DeskTop
 	MoveWindow(0, 0, 655, 600);
 	m_pDlgImage = new CDlgImage;
 	m_pDlgImage->Create(IDD_DlgImage, this);
 	m_pDlgImage->ShowWindow(SW_SHOW);
 	m_pDlgImage->MoveWindow(0, 50, 640, 480);
+
+	// LapTop
+	//MoveWindow(0, 0, 700, 800);
+	//m_pDlgImage = new CDlgImage;
+	//m_pDlgImage->Create(IDD_DlgImage, this);
+	//m_pDlgImage->ShowWindow(SW_SHOW);
+	//m_pDlgImage->MoveWindow(20, 50, 640, 480);
 }
 
 void CCodingTestDlg::OnSysCommand(UINT nID, LPARAM lParam)

@@ -12,9 +12,7 @@ public:
 	CDlgImage(CWnd* pParent = nullptr);   // 표준 생성자입니다.
 	virtual ~CDlgImage();
 	CImage m_image;
-	CWnd* m_pParent;
 	CArray<CPoint, CPoint&> pointArray;
-	int m_nDataCount = 0;
 	int m_nSelColor = 0;
 
 // 대화 상자 데이터입니다.

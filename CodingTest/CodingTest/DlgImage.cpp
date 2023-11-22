@@ -15,7 +15,6 @@ IMPLEMENT_DYNAMIC(CDlgImage, CDialogEx)
 CDlgImage::CDlgImage(CWnd* pParent /*=nullptr*/)
 	: CDialogEx(IDD_DlgImage, pParent)
 {
-	m_pParent = pParent;
 }
 
 CDlgImage::~CDlgImage()
@@ -99,12 +98,12 @@ COLORREF CDlgImage::IsBorderColor(int m_nSelColor)
 {
 	switch (m_nSelColor) {
 	case 0:
-		return COLOR_YELLOW;	// 원
+		return COLOR_YELLOW;	// Circle
 	case 1:
-		return COLOR_RED;		// 삼각형
+		return COLOR_RED;		// Triangle
 	case 2:
-		return COLOR_GREEN;		// 사각형
+		return COLOR_GREEN;		// Square
 	default:
-		return COLOR_BLUE;		// 별
+		return COLOR_BLUE;		// Star
 	}
 }
