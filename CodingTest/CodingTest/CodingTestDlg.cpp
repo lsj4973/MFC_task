@@ -177,26 +177,14 @@ void CCodingTestDlg::OnBnClickedBtnDrawCircle()
 {
 	m_nSelFigure = 0;
 
-	CString str;
-	int nRadius;
-	IDD_INPUT_RADIUS.GetWindowTextW(str);
-	nRadius = _ttoi(str);
-
-	DrawFigure(nRadius);
-	GetData(m_nSelFigure);
+	CheckInputStr();
 }
 
 void CCodingTestDlg::OnBnClickedBtnDrawTriangle()
 {
 	m_nSelFigure = 1;
 
-	CString str;
-	int nRadius;
-	IDD_INPUT_RADIUS.GetWindowTextW(str);
-	nRadius = _ttoi(str);
-
-	DrawFigure(nRadius);
-	GetData(m_nSelFigure);
+	CheckInputStr();
 }
 
 
@@ -204,29 +192,38 @@ void CCodingTestDlg::OnBnClickedBtnDrawSquare()
 {
 	m_nSelFigure = 2;
 
-	CString str;
-	int nRadius;
-	IDD_INPUT_RADIUS.GetWindowTextW(str);
-	nRadius = _ttoi(str);
-
-	DrawFigure(nRadius);
-	GetData(m_nSelFigure);
+	CheckInputStr();
 }
 
 void CCodingTestDlg::OnBnClickedBtnDrawStar()
 {
 	m_nSelFigure = 3;
 
-	CString str;
-	int nRadius;
-	IDD_INPUT_RADIUS.GetWindowTextW(str);
-	nRadius = _ttoi(str);
-
-	DrawFigure(nRadius);
-	GetData(m_nSelFigure);
+	CheckInputStr();
 }
 
-
+void CCodingTestDlg::CheckInputStr()
+{
+	int nHeight = m_pDlgImage->m_image.GetHeight();
+	CString str;
+	IDD_INPUT_RADIUS.GetWindowTextW(str);
+	int nRadius = _ttoi(str);
+	if (nRadius != 0 || str.Compare(_T("0")) == 0) {
+		nRadius = nRadius;
+		if (nRadius > nHeight / 2 - 10 || nRadius <= 0) {
+			AfxMessageBox(_T("Number Out Of Range!!"));
+			IDD_INPUT_RADIUS.SetWindowTextW(_T(""));
+		}
+		else {
+			DrawFigure(nRadius);
+			GetData(m_nSelFigure);
+		}
+	}
+	else {
+		AfxMessageBox(_T("Please Input Number"));
+		IDD_INPUT_RADIUS.SetWindowTextW(_T(""));
+	}
+}
 
 void CCodingTestDlg::DrawFigure(int nRadius)
 {

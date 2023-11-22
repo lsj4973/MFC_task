@@ -39,6 +39,7 @@ public:
 	void SetDlgImage();
 
 	void DrawFigure(int nRadius);
+	void CheckInputStr();
 
 	void SetBorderPoint(int nCenterX, int nCenterY, int nRadius, int nSelFigure, int nPitch);
 
