@@ -36,14 +36,14 @@ protected:
 	DECLARE_MESSAGE_MAP()
 public:
 	CEdit IDD_INPUT_RADIUS;
-	void SetDlgImage();
+	void inItImage();
 
 	void DrawFigure(int nRadius);
 	void CheckInputStr();
 
-	void SetBorderPoint(int nCenterX, int nCenterY, int nRadius, int nSelFigure, int nPitch);
+	void SetBorderPoint(int nCenterX, int nCenterY, int nRadius, int nPitch);
 
-	bool IsBorderPoint(int x, int y, int centerX, int centerY, int radius, int selFigure);
+	bool IsBorderPoint(int x, int y, int centerX, int centerY, int radius);
 	bool isCircleBorder(int i, int j, int nCenterX, int nCenterY, int nRadius);
 	bool isTriangleBorder(int i, int j, int nCenterX, int nCenterY, int nRadius);
 	bool isSquareBorder(int i, int j, int nCenterX, int nCenterY, int nRadius);
@@ -51,8 +51,8 @@ public:
 
 	bool isCrossLine(int i, int j, int nCenterX, int nCenterY, int nRadius);
 
-	void GetData(int selFigure);
-	CString IsFigure(int nSelFigure);
+	void GetData();
+	CString IsFigure();
 
 	double isMinDistance(double dCenterX, double dCenterY);
 	double isMaxDistance(double dCenterX, double dCenterY);

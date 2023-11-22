@@ -110,12 +110,12 @@ BOOL CCodingTestDlg::OnInitDialog()
 	SetIcon(m_hIcon, FALSE);		// 작은 아이콘을 설정합니다.
 
 	// TODO: 여기에 추가 초기화 작업을 추가합니다.
-	SetDlgImage();
+	inItImage();
 
 	return TRUE;  // 포커스를 컨트롤에 설정하지 않으면 TRUE를 반환합니다.
 }
 
-void CCodingTestDlg::SetDlgImage()
+void CCodingTestDlg::inItImage()
 {
 	MoveWindow(0, 0, 655, 600);
 	m_pDlgImage = new CDlgImage;
@@ -216,7 +216,7 @@ void CCodingTestDlg::CheckInputStr()
 		}
 		else {
 			DrawFigure(nRadius);
-			GetData(m_nSelFigure);
+			GetData();
 		}
 	}
 	else {
@@ -240,7 +240,7 @@ void CCodingTestDlg::DrawFigure(int nRadius)
 	m_pDlgImage->m_nSelColor = m_nSelFigure;
 
 	// 원 테두리 좌표 배열에 저장
-	SetBorderPoint(nCenterX, nCenterY, nRadius, m_nSelFigure, nPitch);
+	SetBorderPoint(nCenterX, nCenterY, nRadius, nPitch);
 
 	int nGray = 100;
 	// 십자선 그리기
@@ -255,13 +255,13 @@ void CCodingTestDlg::DrawFigure(int nRadius)
 	m_pDlgImage->Invalidate();
 }
 
-void CCodingTestDlg::SetBorderPoint(int nCenterX, int nCenterY, int nRadius, int nSelFigure, int nPitch)
+void CCodingTestDlg::SetBorderPoint(int nCenterX, int nCenterY, int nRadius, int nPitch)
 {
 	int nBlack = 0;
 	unsigned char* fm = (unsigned char*)m_pDlgImage->m_image.GetBits();
 	for (int j = nCenterY - nRadius; j <= nCenterY + nRadius; j++) {
 		for (int i = nCenterX - nRadius; i <= nCenterX + nRadius; i++) {
-			if (IsBorderPoint(i, j, nCenterX, nCenterY, nRadius, nSelFigure)) {
+			if (IsBorderPoint(i, j, nCenterX, nCenterY, nRadius)) {
 				fm[nPitch * j + i] = nBlack;
 				m_pDlgImage->pointArray.Add(CPoint(i, j));
 			}
@@ -269,9 +269,9 @@ void CCodingTestDlg::SetBorderPoint(int nCenterX, int nCenterY, int nRadius, int
 	}
 }
 
-bool CCodingTestDlg::IsBorderPoint(int x, int y, int centerX, int centerY, int radius, int nSelFigure)
+bool CCodingTestDlg::IsBorderPoint(int x, int y, int centerX, int centerY, int radius)
 {
-	switch (nSelFigure) {
+	switch (m_nSelFigure) {
 	case 0:
 		return isCircleBorder(x, y, centerX, centerY, radius);
 	case 1:
@@ -408,9 +408,9 @@ void CCodingTestDlg::OnDestroy()
 }
 
 // 무게 중심 구하기
-void CCodingTestDlg::GetData(int nSelFigure)
+void CCodingTestDlg::GetData()
 {
-	CString Figure = IsFigure(nSelFigure);;
+	CString Figure = IsFigure();;
 	static int nTimes = 1;
 	unsigned char* fm = (unsigned char*)m_pDlgImage->m_image.GetBits();
 	int nWidth = m_pDlgImage->m_image.GetWidth();
@@ -447,10 +447,10 @@ void CCodingTestDlg::GetData(int nSelFigure)
 	nTimes++;
 }
 
-CString CCodingTestDlg::IsFigure(int nSelFigure)
+CString CCodingTestDlg::IsFigure()
 {
 	CString str;
-	switch (nSelFigure) {
+	switch (m_nSelFigure) {
 	case 0:
 		str = "Circle";
 		break;
