@@ -13,6 +13,7 @@ class CCodingTestDlg : public CDialogEx
 public:
 	CCodingTestDlg(CWnd* pParent = nullptr);	// 표준 생성자입니다.
 	CDlgImage* m_pDlgImage;
+	int m_nSelFigure = 0;
 
 // 대화 상자 데이터입니다.
 #ifdef AFX_DESIGN_TIME
@@ -36,14 +37,28 @@ protected:
 public:
 	CEdit IDD_INPUT_RADIUS;
 	void SetDlgImage();
+
 	void DrawFigure(int nRadius);
-	void SetBorderPoint(int nCenterX, int nCenterY, int nRadius, int nSelFigure);
+
+	void SetBorderPoint(int nCenterX, int nCenterY, int nRadius, int nSelFigure, int nPitch);
+
 	bool IsBorderPoint(int x, int y, int centerX, int centerY, int radius, int selFigure);
 	bool isCircleBorder(int i, int j, int nCenterX, int nCenterY, int nRadius);
 	bool isTriangleBorder(int i, int j, int nCenterX, int nCenterY, int nRadius);
 	bool isSquareBorder(int i, int j, int nCenterX, int nCenterY, int nRadius);
+	bool isStarBorder(int i, int j, int nCenterX, int nCenterY, int nRadius);
+
 	bool isCrossLine(int i, int j, int nCenterX, int nCenterY, int nRadius);
+
+	void GetData(int selFigure);
+	CString IsFigure(int nSelFigure);
+
+	double isMinDistance(double dCenterX, double dCenterY);
+	double isMaxDistance(double dCenterX, double dCenterY);
+
 	afx_msg void OnDestroy();
-	afx_msg void OnBnClickedBtnGetData();
-	afx_msg void OnBnClickedBtnDrawFigure();
+	afx_msg void OnBnClickedBtnDrawCircle();
+	afx_msg void OnBnClickedBtnDrawTriangle();
+	afx_msg void OnBnClickedBtnDrawSquare();
+	afx_msg void OnBnClickedBtnDrawStar();
 };

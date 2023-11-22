@@ -14,6 +14,10 @@
 #define IDC_RADIUS                      1001
 #define IDC_INPUT_RADIUS                1002
 #define IDC_BTN_GET_DATA                1003
+#define IDC_BTN_DRAW_TRIANGLE           1005
+#define IDC_BTN_DRAW_SQUARE             1006
+#define IDC_BTN_DRAW_SQUARE2            1007
+#define IDC_BTN_DRAW_STAR               1007
 
 // Next default values for new objects
 // 

@@ -103,8 +103,8 @@ COLORREF CDlgImage::IsBorderColor(int m_nSelColor)
 	case 1:
 		return COLOR_RED;		// 삼각형
 	case 2:
-		return COLOR_BLUE;		// 사각형
+		return COLOR_GREEN;		// 사각형
 	default:
-		return COLOR_GREEN;
+		return COLOR_BLUE;		// 별
 	}
 }
