@@ -14,6 +14,7 @@ public:
 	CImage m_image;
 	CArray<CPoint, CPoint&> pointArray;
 	int m_nSelColor = 0;
+	CPoint CenterPoint;
 
 // 대화 상자 데이터입니다.
 #ifdef AFX_DESIGN_TIME
@@ -29,5 +30,6 @@ public:
 	afx_msg void OnPaint();
 	void InitImage();
 	void drawData(CDC* pDC);
+	void drawCenter(CDC* pDC);
 	COLORREF IsBorderColor(int m_nSelColor);
 };

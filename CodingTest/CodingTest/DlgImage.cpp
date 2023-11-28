@@ -56,6 +56,7 @@ void CDlgImage::OnPaint()
 		m_image.Draw(dc, 0, 0);
 
 	drawData(&dc);
+	drawCenter(&dc);
 }
 
 void CDlgImage::InitImage()
@@ -90,6 +91,21 @@ void CDlgImage::drawData(CDC* pDC)
 		rect.InflateRect(1, 1);
 
 		pDC->FillRect(rect, &CBrush(IsBorderColor(m_nSelColor)));
+	}
+}
+
+void CDlgImage::drawCenter(CDC* pDC)
+{
+	if (CenterPoint != CPoint(0, 0))
+	{
+		CRect rect;
+
+		for (int i = 0; i < 1; i++) {
+			rect.SetRect(CenterPoint, CenterPoint);
+			rect.InflateRect(2, 2);
+
+			pDC->FillRect(rect, &CBrush(COLOR_RED));
+		}
 	}
 }
 

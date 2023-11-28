@@ -51,7 +51,7 @@ public:
 
 	bool isCrossLine(int i, int j, int nCenterX, int nCenterY, int nRadius);
 
-	void GetData();
+	void GetData(int nCenterX, int nCenterY, int nRadius);
 	CString IsFigure();
 
 	double isMinDistance(double dCenterX, double dCenterY);

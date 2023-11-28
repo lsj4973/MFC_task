@@ -224,7 +224,6 @@ void CCodingTestDlg::CheckInputStr()
 		}
 		else {
 			DrawFigure(nRadius);
-			GetData();
 		}
 	}
 	else {
@@ -246,21 +245,13 @@ void CCodingTestDlg::DrawFigure(int nRadius)
 	int nCenterY = rand() % (nHeight - nRadius * 2) + nRadius;
 
 	m_pDlgImage->m_nSelColor = m_nSelFigure;
+	m_pDlgImage->CenterPoint.x = nCenterX;
+	m_pDlgImage->CenterPoint.y = nCenterY;
 
 	// 원 테두리 좌표 배열에 저장
 	SetBorderPoint(nCenterX, nCenterY, nRadius, nPitch);
 
-	int nGray = 100;
-	// 십자선 그리기
-	for (int j = nCenterY - nRadius; j <= nCenterY + nRadius; j++) {
-		for (int i = nCenterX - nRadius; i <= nCenterX + nRadius; i++) {
-			if (isCrossLine(i, j, nCenterX, nCenterY, nRadius)) {
-				fm[nPitch * j + i] = nGray;
-			}
-		}
-	}
-
-	m_pDlgImage->Invalidate();
+	GetData(nCenterX, nCenterY, nRadius);
 }
 
 void CCodingTestDlg::SetBorderPoint(int nCenterX, int nCenterY, int nRadius, int nPitch)
@@ -416,7 +407,7 @@ void CCodingTestDlg::OnDestroy()
 }
 
 // 무게 중심 구하기
-void CCodingTestDlg::GetData()
+void CCodingTestDlg::GetData(int nCenterX, int nCenterY, int nRadius)
 {
 	CString Figure = IsFigure();;
 	static int nTimes = 1;
@@ -446,9 +437,24 @@ void CCodingTestDlg::GetData()
 	double dMinDistance = isMinDistance(dCenterX, dCenterY);
 	double dMaxDistance = isMaxDistance(dCenterX, dCenterY);
 
+	// 무게 중심 십자선 그리기
+	for (int j = (int)dCenterY - nRadius; j <= (int)dCenterY + nRadius; j++) {
+		for (int i = (int)dCenterX - nRadius; i <= (int)dCenterX + nRadius; i++) {
+			if (isCrossLine(i, j, (int)dCenterX, (int)dCenterY, nRadius)) {
+				fm[nPitch * j + i] = nGray;
+			}
+		}
+	}
+
+	m_pDlgImage->Invalidate();
+
+	// 오차거리 구하기
+	double dErrorDistance = sqrt((nCenterX - dCenterX) * (nCenterX - dCenterX) + (nCenterY - dCenterY) * (nCenterY - dCenterY));
+
 	cout << "#" << nTimes << "  ";
 	wprintf(L"%s\n\n", (LPCTSTR)Figure);
 	cout << "무게중심 : (" << dCenterX << ", " << dCenterY << ")" << endl;
+	cout << "오차거리 : " << dErrorDistance << endl;
 	cout << "최소거리 : " << dMinDistance << endl;
 	cout << "최대거리 : " << dMaxDistance << endl;
 	cout << "======================================================" << endl;
